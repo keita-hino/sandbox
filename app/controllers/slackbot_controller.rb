@@ -5,8 +5,8 @@ class SlackbotController < ApplicationController
   before_action :slack_init, only: [:exec]
 
   def exec
-    result = "/ruby_exec " + params['text'] + "\n"
-    result << eval(params['text']).to_s
+    p = Practitioner.new(params['text'])
+    result = p.execute
     @client.chat_postMessage(
       channel: params['channel_id'],
       text: result
