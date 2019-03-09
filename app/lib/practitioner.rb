@@ -4,7 +4,20 @@ class Practitioner
     @command = command
     @result = "/ruby_exec " + command + "\n"
   end
+
   def execute
-    @result << eval(command).to_s
+    if safe?
+      @result << eval(command).to_s
+    else
+      @result << "Dir、File、IO、FileTestのメソッドは使用できません。"
+    end
+  end
+
+  def safe?
+    l = ["Dir.","File.","IO.","FileTest"]
+    l.map do |v|
+      return false if command.include?(v)
+    end
+    return true
   end
 end
