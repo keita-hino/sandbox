@@ -13,12 +13,12 @@ class Practitioner
         @result << e.to_s
       end
     else
-      @result << "Dir、File、IO、FileTestのメソッドは使用できません。"
+      @result << "許可されていない処理が含まれています。"
     end
   end
 
   def safe?
-    l = ["Dir.","File.","IO.","FileTest"]
+    l = ["Dir.","File.","IO.","FileTest","ENV"]
     l.map do |v|
       return false if command.include?(v)
     end
