@@ -7,7 +7,11 @@ class Practitioner
 
   def execute
     if safe?
-      @result << eval(command).to_s
+      begin
+        @result << eval(command).to_s
+      rescue => e
+        @result << e.to_s
+      end
     else
       @result << "Dir、File、IO、FileTestのメソッドは使用できません。"
     end
