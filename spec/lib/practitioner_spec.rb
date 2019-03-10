@@ -33,5 +33,13 @@ describe Practitioner do
         expect(p.safe?).to be_falsey
       end
     end
+
+    context 'ENVを参照しようとした場合' do
+      it 'falseを返す' do
+        command = "ENV"
+        p = Practitioner.new(command)
+        expect(p.safe?).to be_falsey
+      end
+    end
   end
 end
