@@ -1,5 +1,5 @@
 class Practitioner
-  attr_reader :command
+  attr_accessor :command
   def initialize(command)
     @command = command
     @result = "/ruby_exec " + command + "\n"
@@ -8,7 +8,8 @@ class Practitioner
   def execute
     if safe?
       begin
-        @result << eval(command).to_s
+        escape!
+        @result << eval(@command).to_s
       rescue => e
         @result << e.to_s
       end
@@ -23,5 +24,15 @@ class Practitioner
       return false if command.include?(v)
     end
     return true
+  end
+
+  def escape!
+
+    if @command.include?("”")
+      @command.slice!("”")
+      @command.slice!("“")
+      @command = "'" + @command + "'"
+    end
+    return @command
   end
 end
