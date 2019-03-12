@@ -42,4 +42,14 @@ describe Practitioner do
       end
     end
   end
+  
+  describe 'escape!' do
+    context '文字列を含む時' do
+      it 'エスケープした値を返す' do
+        command = "”a“"
+        p = Practitioner.new(command).escape!
+        expect(p).to eq("'a'")
+      end
+    end
+  end
 end
